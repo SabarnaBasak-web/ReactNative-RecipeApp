@@ -37,9 +37,8 @@ const favouriteNavigator = ({navigation}) => {
                 name="bars"
                 size={28}
                 color="#fff"
-                onPress={
-                  () => navigation.dispatch(DrawerActions.toggleDrawer())
-                  // console.log('pressed from fav!  !')
+                onPress={() =>
+                  navigation.dispatch(DrawerActions.toggleDrawer())
                 }
               />
             </HeaderButton>
@@ -75,9 +74,8 @@ const MealNavigator = () => {
                 name="bars"
                 size={28}
                 color="#fff"
-                onPress={
-                  () => navigation.dispatch(DrawerActions.toggleDrawer())
-                  // console.log('pressed')
+                onPress={() =>
+                  navigation.dispatch(DrawerActions.toggleDrawer())
                 }
               />
             </HeaderButton>
@@ -100,7 +98,7 @@ const MealNavigator = () => {
                 name="star"
                 size={20}
                 color="#fff"
-                onPress={route.params.toggleFavOption()}
+                onPress={() => route.params.toggleFavOption()}
               />
             </HeaderButton>
           ),
@@ -143,7 +141,7 @@ const FilterNavigator = () => {
                 name="save"
                 size={20}
                 color="#fff"
-                onPress={route.params.save()}
+                onPress={() => route.params.save()}
               />
             </HeaderButton>
           ),

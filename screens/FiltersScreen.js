@@ -2,22 +2,25 @@ import React, {useState, useEffect, useCallback} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import FilterSwitch from '../components/FilterSwitch';
 import {CommonActions} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {setFilters} from '../store/actions/mealActions';
 
 const FiltersScreen = ({navigation, route}) => {
   const [isGlutenFree, setIsGlutenFree] = useState(false);
-  const [isVeganFree, setIsVeganFree] = useState(false);
-  const [isVegatarianFree, setIsVegatarianFree] = useState(false);
+  const [isVegan, setisVegan] = useState(false);
+  const [isVegatarian, setisVegatarian] = useState(false);
   const [isLactoseFree, setIsLactoseFree] = useState(false);
-
+  const dispatch = useDispatch();
   const saveFilters = useCallback(() => {
     const appliedFilters = {
       glutenFree: isGlutenFree,
-      veganFree: isVeganFree,
-      vegetarianFree: isVegatarianFree,
+      vegan: isVegan,
+      vegetarian: isVegatarian,
       lactoseFree: isLactoseFree,
     };
-    console.log('From Filer Screen ', appliedFilters);
-  }, [isGlutenFree, isVeganFree, isVegatarianFree, isLactoseFree]);
+    console.log('From Filter Screen ', appliedFilters);
+    dispatch(setFilters(appliedFilters));
+  }, [isGlutenFree, isVegan, isVegatarian, isLactoseFree, dispatch]);
 
   useEffect(() => {
     navigation.dispatch(CommonActions.setParams({save: saveFilters}));
@@ -32,14 +35,14 @@ const FiltersScreen = ({navigation, route}) => {
         state={isGlutenFree}
       />
       <FilterSwitch
-        onChange={newValue => setIsVeganFree(newValue)}
-        label="Vegan Free"
-        state={isVeganFree}
+        onChange={newValue => setisVegan(newValue)}
+        label="Vegan"
+        state={isVegan}
       />
       <FilterSwitch
-        onChange={newValue => setIsVegatarianFree(newValue)}
-        label="Vegetarian Free"
-        state={isVegatarianFree}
+        onChange={newValue => setisVegatarian(newValue)}
+        label="Vegetarian"
+        state={isVegatarian}
       />
       <FilterSwitch
         onChange={newValue => setIsLactoseFree(newValue)}
